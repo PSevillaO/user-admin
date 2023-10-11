@@ -1,4 +1,4 @@
-const users = [
+const usersArray = [
     {
         fullname: 'John Doe',
         age: 30,
@@ -7,7 +7,8 @@ const users = [
         active: true,
         password: 'password123',
         bornDate: new Date('1993-01-01').getTime(),
-        location: 'New York, NY'
+        location: 'New York, NY',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/7/71/Mk8iconyoshi.png?width=1280'
     },
     {
         fullname: 'Jane Doe',
@@ -17,7 +18,8 @@ const users = [
         active: false,
         password: 'password456',
         bornDate: new Date('1998-05-05').getTime(),
-        location: 'Los Angeles, CA'
+        location: 'Los Angeles, CA',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/f/f5/Mk8icondaisy.png?width=1280'
     },
     {
         fullname: 'Alice Johnson',
@@ -27,7 +29,8 @@ const users = [
         active: true,
         password: 'password789',
         bornDate: new Date('1988-08-08').getTime(),
-        location: 'Miami, FL'
+        location: 'Miami, FL',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/1/1d/Mk8icontoadette.png?width=325'
     },
     {
         fullname: 'Michael Smith',
@@ -37,7 +40,8 @@ const users = [
         active: false,
         password: 'password101',
         bornDate: new Date('1983-04-10').getTime(),
-        location: 'Chicago, IL'
+        location: 'Chicago, IL',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/d/d1/Mk8iconrosalina.png?width=1280'
     },
     {
         fullname: 'Emily Johnson',
@@ -47,7 +51,8 @@ const users = [
         active: true,
         password: 'password202',
         bornDate: new Date('1995-02-15').getTime(),
-        location: 'Houston, TX'
+        location: 'Houston, TX',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/5/59/Mk8iconpeach.png?width=325'
     },
     {
         fullname: 'Daniel Lee',
@@ -57,7 +62,8 @@ const users = [
         active: false,
         password: 'password303',
         bornDate: new Date('1989-07-07').getTime(),
-        location: 'San Francisco, CA'
+        location: 'San Francisco, CA',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/b/bf/Mk8iconmario.png?width=325'
     },
     {
         fullname: 'Samantha Davis',
@@ -67,7 +73,8 @@ const users = [
         active: true,
         password: 'password404',
         bornDate: new Date('2001-11-11').getTime(),
-        location: 'Boston, MA'
+        location: 'Boston, MA',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/2/2d/Mk8icondk.png?width=325'
     },
     {
         fullname: 'James Moore',
@@ -77,7 +84,8 @@ const users = [
         active: false,
         password: 'password505',
         bornDate: new Date('1978-12-19').getTime(),
-        location: 'Dallas, TX'
+        location: 'Dallas, TX',
+        image: 'https://m.media-amazon.com/images/I/81wNRtDaTXL.png?width=325'
     },
     {
         fullname: 'Isabella Taylor',
@@ -87,7 +95,8 @@ const users = [
         active: true,
         password: 'password606',
         bornDate: new Date('1994-06-24').getTime(),
-        location: 'San Diego, CA'
+        location: 'San Diego, CA',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/3/3a/Mk8iconkoopa.png?width=325'
     },
     {
         fullname: 'Ethan Johnson',
@@ -97,25 +106,36 @@ const users = [
         active: false,
         password: 'password707',
         bornDate: new Date('1992-03-03').getTime(),
-        location: 'Denver, CO'
+        location: 'Denver, CO',
+        image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/b/b7/Mk8iconbowser.png?width=325'
     }
 ];
 
+
 const tableBody = document.getElementById('table-body')
 
-users.forEach(user =>{
+usersArray.forEach(user => {
     tableBody.innerHTML += `<tr class="table-body">
     <td class="user-image">
-        <img src="https://m.media-amazon.com/images/I/81wNRtDaTXL.png" alt="Imagen de prueba">
+        <img src=${user.image}" alt=${user.fullname} avatar>
     </td>
     <td class="user-name">${user.fullname}</td>
     <td class="user-email">${user.email}</td>
     <td class="user-location">${user.location}</td>
     <td class="user-age">${user.age}</td>
-    <td class="user-date">${user.bornDate}</td>
+    <td class="user-date">${formatDate(user.bornDate)}</td>
 </tr>`
 
 })
 
 
+function formatDate(date){
+    const collector = new Intl.DateTimeFormat('es-AR',{
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    })
+    const fechaFormateada = collector.format(date)
+    return fechaFormateada
 
+}
