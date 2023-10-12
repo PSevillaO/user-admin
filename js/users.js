@@ -113,24 +113,52 @@ const usersArray = [
 
 
 const tableBody = document.getElementById('table-body')
+const searchInput = document.getElementById('search')
 
-usersArray.forEach(user => {
-    tableBody.innerHTML += `<tr class="table-body">
-    <td class="user-image">
-        <img src=${user.image}" alt=${user.fullname} avatar>
-    </td>
-    <td class="user-name">${user.fullname}</td>
-    <td class="user-email">${user.email}</td>
-    <td class="user-location">${user.location}</td>
-    <td class="user-age">${user.age}</td>
-    <td class="user-date">${formatDate(user.bornDate)}</td>
-</tr>`
+searchInput.addEventListener('keyup', (evento) => {
+    const inputValue = evento.target.value.toLowerCase()
 
+    const usuariosFiltrados = usersArray.filter((usuario) => usuario.fullname.toLowerCase().includes(inputValue))
+
+    console.log(usuariosFiltrados)
+
+    pintarUsuario(usuariosFiltrados)
 })
 
+pintarUsuario(usersArray)
 
-function formatDate(date){
-    const collector = new Intl.DateTimeFormat('es-AR',{
+function pintarUsuario(arrayPintar) {
+    tableBody.innerHTML = '';
+    arrayPintar.forEach((user, index) => {
+        tableBody.innerHTML += `<tr class="table-body">
+        <td class="user-image">
+            <img src=${user.image}" alt=${user.fullname} avatar>
+        </td>
+        <td class="user-name">${user.fullname}</td>
+        <td class="user-email">${user.email}</td>
+        <td class="user-location">${user.location}</td>
+        <td class="user-age">${user.age}</td>
+        <td class="user-date">${formatDate(user.bornDate)}</td>
+        <td> 
+        <button class = "action-btn btn-danger" title="Borrar Usuario" onClick="borrarUsuario(${index})">
+        <i class="fa-solid fa-trash-can"></i>
+        </button>
+        </td>
+    </tr>`
+    })
+}
+
+
+function borrarUsuario(indice) {
+    usersArray.splice(indice, 1)
+    pintarUsuario(usersArray)
+
+}
+
+
+
+function formatDate(date) {
+    const collector = new Intl.DateTimeFormat('es-AR', {
         day: '2-digit',
         month: '2-digit',
         year: 'numeric'
