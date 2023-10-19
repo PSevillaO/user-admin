@@ -114,6 +114,43 @@ const usersArray = [
 
 const tableBody = document.getElementById('table-body')
 const searchInput = document.getElementById('search')
+const userForm = document.getElementById('user-form')
+
+userForm.addEventListener("submit", (evt) => {
+    evt.preventDefault()
+
+    const el = evt.target.elements
+    console.log(evt.target.elements.location.value)
+
+    if(el.password.value!== el.password2.value){
+        alert("La contraseñas no coinciden")
+        return
+    }
+    const userExists = usersArray.find((user) =>{
+        if(user.email=== el.email.value){
+            return true
+        }
+    })
+    if(userExists){
+        alert("El correo ya se encuentra registrado")
+        return
+    }
+
+    usuarioNuevo = {
+        fullname: el.fullname.value,
+        age: el.age.valueAsNumber,
+        email: el.email.value,
+        password: el.password.value,
+        active: el.active.ckecked,// esta propiedad da true o false
+        bornDate: new Date(el.bornDate.value).getTime(),
+        location: el.location.value,
+        id: crypto.randomUUID(),
+        image: el.image.value
+    }
+    usersArray.push(usuarioNuevo)
+    pintarUsuario(usersArray)
+
+})
 
 searchInput.addEventListener('keyup', (evento) => {
     const inputValue = evento.target.value.toLowerCase()
