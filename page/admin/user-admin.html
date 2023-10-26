@@ -18,9 +18,12 @@
     <div class="admin-container">
         <section class="form-container">
             <form id="user-form">
+
+                <input type="hidden" name="id">
+
                 <div class="input-group">
                     <label for="fullname">Nombre Completo</label>
-                    <input type="text" name="fullname" id="fullname" value="Pepe Argento">
+                    <input type="text" name="fullname" id="fullname">
                 </div>
                 <div class="input-group">
                     <label for="password">Contraseña</label>
@@ -32,9 +35,10 @@
                 </div>
                 <div class="input-group">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" value="pepe@gmail.com">
+                    <input type="email" name="email" id="email" >
                 </div>
                 <div class="input-group">
+                    <label for="location">Localidad</label>
                     <select name="location" >
                         <option value="Buenos Aires">Buenos Aires</option>
                         <option value="Mendoza">Mendoza</option>
@@ -44,22 +48,22 @@
                 </div>
                 <div class="input-group">
                     <label for="age">Edad</label>
-                    <input type="number" name="age" id="age" value="35">
+                    <input type="number" name="age" id="age" >
                 </div>
                 <div class="input-group">
                     <label for="bornDate">Fecha Nacimiento</label>
-                    <input type="date" name="bornDate" id="bornDate" value="2012-08-15">
+                    <input type="date" name="bornDate" id="bornDate">
                 </div>
                 <div class="input-group">
                     <label for="image">Url de la imagen</label>
-                    <input type="url" name="image" id="image" value='https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/7/71/Mk8iconyoshi.png?width=1280'>
+                    <input type="url" name="image" id="image" >
                 </div>
                 <!-- #checkbox -->
                 <div class="mb">
                     <label for="active">Activo</label>
                     <input type="checkbox" name="active" id="active">
                 </div>
-                <button type="submit" class="btn-form">Agregar</button>
+                <button type="submit" class="btn-form" id="btn-form">Agregar</button>
 
             </form>
         </section>
@@ -83,6 +87,7 @@
         </section>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="/js/users.js"></script>
 
 </body>
