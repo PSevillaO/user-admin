@@ -238,7 +238,7 @@ function pintarUsuario(arrayPintar) {
         <td class="user-age">${user.age}</td>
         <td class="user-date">${formatDate(user.bornDate)}</td>
         <td> 
-        <button class = "action-btn btn-danger" title="Borrar Usuario" onClick="borrarUsuario( '${user.id}','${user.fullname}' ) ">
+        <button class = "action-btn btn-danger" title="Borrar Usuario" onClick="borrarUsuario( '${user.id}','git${user.fullname}' ) ">
         <i class="fa-solid fa-trash-can"></i>
         </button>
         <button class = "action-btn " title="Editar Usuario" onClick="editarUsuario( '${user.id}' )">
