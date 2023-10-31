@@ -1,4 +1,4 @@
-const usersArray = [
+const usersStart = [
     {
         fullname: 'John Doe',
         age: 30,
@@ -111,6 +111,23 @@ const usersArray = [
     }
 ];
 
+// const usersArray = JSON.parse(localStorage.getItem("user"));
+// let usersArray;
+
+// if (JSON.parse(localStorage.getItem("users"))){
+//     usersArray = JSON.parse(localStorage.getItem("users"));
+// }else{
+//     localStorage.setItem("users",JSON.stringify(usersStart))
+// }
+
+
+// Seteo los usuarios iniciales 
+if (localStorage.getItem("users") === null) {
+    localStorage.setItem("users", JSON.stringify(usersStart))
+}
+const usersArray = JSON.parse(localStorage.getItem("users"));
+
+
 
 const tableBody = document.getElementById('table-body')
 const searchInput = document.getElementById('search')
@@ -123,19 +140,19 @@ userForm.addEventListener("submit", (evt) => {
     const el = evt.target.elements
     // console.log(evt.target.elements.location.value)
 
-    if (el.password.value !== el.password2.value) {
-        alert("La contraseñas no coinciden")
-        return
-    }
+    // if (el.password.value !== el.password2.value) {
+    // alert("La contraseñas no coinciden")
+    // return
+    // }
     const emailExists = usersArray.find((user) => {
         if (user.email === el.email.value) {
             return true
         }
     })
 
-    if (emailExists && el.id.value !==emailExists.id ) {
+    if (emailExists && el.id.value !== emailExists.id) {
         Swal.fire({
-            title:"El Correo ya existe",
+            title: "El Correo ya existe",
             icon: 'error'
         })
         // alert("El correo ya se encuentra registrado")
@@ -183,7 +200,6 @@ userForm.addEventListener("submit", (evt) => {
             icon: 'success',
             timer: 1000
         })
-
     } else {
         // agregando un usuaruo nuevo   
         usersArray.push(user)
@@ -195,13 +211,9 @@ userForm.addEventListener("submit", (evt) => {
             icon: 'success',
             timer: 1000
         })
-
-
     }
-
-
     pintarUsuario(usersArray)
-
+    actualizarLocalStorage()
     resetearFormulario();
 
 })
@@ -219,7 +231,6 @@ function resetearFormulario() {
 searchInput.addEventListener('keyup', (evento) => {
     const inputValue = evento.target.value.toLowerCase()
     const usuariosFiltrados = usersArray.filter((usuario) => usuario.fullname.toLowerCase().includes(inputValue))
-    console.log(usuariosFiltrados)
     pintarUsuario(usuariosFiltrados)
 })
 
@@ -238,7 +249,7 @@ function pintarUsuario(arrayPintar) {
         <td class="user-age">${user.age}</td>
         <td class="user-date">${formatDate(user.bornDate)}</td>
         <td> 
-        <button class = "action-btn btn-danger" title="Borrar Usuario" onClick="borrarUsuario( '${user.id}','git${user.fullname}' ) ">
+        <button class = "action-btn btn-danger" title="Borrar Usuario" onClick="borrarUsuario( '${user.id}','${user.fullname}' ) ">
         <i class="fa-solid fa-trash-can"></i>
         </button>
         <button class = "action-btn " title="Editar Usuario" onClick="editarUsuario( '${user.id}' )">
@@ -249,17 +260,21 @@ function pintarUsuario(arrayPintar) {
     })
 }
 
+function actualizarLocalStorage() {
+    localStorage.setItem("users", JSON.stringify(usersArray));
+}
 
-function borrarUsuario(ID,nombre) {
 
+function borrarUsuario(ID, nombre) {
 
     const confirmDelete = confirm(`desea borrar el usuario ${nombre}`)
-    const indice = usersArray.findIndex( user => user.id === ID)
+    const indice = usersArray.findIndex(user => user.id === ID)
 
     if (!confirmDelete) return;
 
     usersArray.splice(indice, 1)
     pintarUsuario(usersArray)
+    actualizarLocalStorage()
 
 }
 
@@ -289,7 +304,7 @@ function editarUsuario(id) {
     el.location.value = userEdit.location;
     el.active.ckecked = userEdit.active;
 
-    console.log("chequeado ",el.active.ckecked, userEdit.active)
+    console.log("chequeado ", el.active.ckecked, userEdit.active)
 
     el.password.value = userEdit.password
     el.password.disabled = true
