@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .container {
     max-width: 1200px;
 }
@@ -112,6 +117,27 @@ body {
     margin-bottom: .75rem;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    background-color: dodgerblue;
+    color: white;
 
+    
+}
+.header a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    display: inline-block;
+    &:hover {
+        background-color: rgb(17, 91, 164);
+    }
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.25rem;
+}
 
 
