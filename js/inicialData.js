@@ -1,15 +1,15 @@
 const usersStart = [
     {
-        fullname: 'John Doe',
+        fullname: 'Admin',
         age: 30,
         email: 'john.doe@example.com',
         id: '1',
         active: true,
-        password: 'password123',
+        password: 'Admin',
         bornDate: new Date('1993-01-01').getTime(),
         location: 'Buenos Aires',
         image: 'https://oyster.ignimgs.com/mediawiki/apis.ign.com/mario-kart-for-wii-u/7/71/Mk8iconyoshi.png?width=1280',
-        role: 'Admin'
+        role: 'ADMIN_ROLE'
     },
     {
         fullname: 'Jane Doe',
